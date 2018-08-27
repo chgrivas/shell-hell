@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Create release
+#
+# 0. Check that necessary commands are available
+# 1. TBD
+SELF=$(basename $0)
+
+# The most important line in each script
+set -e
+
+# Check for the git command
+command -v git >/dev/null || {
+    echo "$SELF: git command not found." 1>&2
+    exit 1
+}
+# Check for the mvn command (maven)
+command -v mvn >/dev/null || {
+    echo "$SELF: mvn command not found." 1>&2
+    exit 1
+}
+
+get_current_branch() {
+    BRANCH_NAME=$(git symbolic-ref -q HEAD)
+    BRANCH_NAME=${BRANCH_NAME##refs/heads/}
+    echo "$SELF: branch name '$BRANCH_NAME'"
+}
+
+get_current_branch
+
+
